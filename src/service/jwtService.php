@@ -7,7 +7,7 @@ use Firebase\JWT\Key;
 
 class jwtService {
     private static string $issuer = 'MK';
-    private static int $expirationTime = 10 * 60;
+    private static int $expirationTime = 24 * 60;
 
     public static function createToken($username): string {
         $issuedAt = time();
@@ -29,9 +29,5 @@ class jwtService {
         $decoded = JWT::decode($token, new Key($key, 'HS512'));
 
         return $decoded;
-    }
-
-    public static function getSecretKey(): string {
-        return envLoaderService::getEnv('IP');
     }
 }

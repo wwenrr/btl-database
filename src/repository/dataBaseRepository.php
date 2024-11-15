@@ -1,6 +1,6 @@
 <?php
 
-class dataBaseRespository {
+class dataBaseRepository {
     private $servername;
     private $username;
     private $password;
@@ -24,6 +24,10 @@ class dataBaseRespository {
         if ($this->conn->connect_error) {
             throw new Exception("Connection failed: " . $this->conn->connect_error);
         }
+    }
+
+    public function __construct() {
+        $this->connect(envLoaderService::getEnv('DB_NAME'));
     }
 
     protected function queryExecutor($sql) {

@@ -2,6 +2,7 @@
 
 class Controller {
     protected $requestBody;
+    protected hospitalRepository $hospitalRepository;
 
     protected function responseJsonData($message, $code = 200) {
         http_response_code($code);
@@ -29,5 +30,6 @@ class Controller {
     public function __construct() {
         $inputData = file_get_contents('php://input');
         $this->requestBody = json_decode($inputData, true);
+        $this->hospitalRepository = new hospitalRepository();
     }
 }
