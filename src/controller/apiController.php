@@ -2,6 +2,8 @@
 
 class apiController extends Controller {
     public function __construct() {
+        parent::__construct();
+
         $token = null;
 
         if (isset($headers['Authorization'])) {
