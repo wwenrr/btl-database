@@ -6,7 +6,7 @@ class apiController extends Controller {
 
         $token = null;
 
-        if ($this->header['Authorization']) {
+        if (isset($this->header['Authorization'])) {
             $token = str_replace('Bearer ', '', $this->header['Authorization']);
         }
 
