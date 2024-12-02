@@ -95,4 +95,28 @@ class hospitalRepository extends dataBaseRepository {
 
         return $this->getDataFromResult($this->queryExecutor($sql));
     }
+
+    public function getAllExaminationReport() {
+        $sql = "
+            SELECT * FROM examination a 
+            INNER JOIN exam_use_med b 
+            ON a.exam_id = b.exam_id
+            INNER JOIN medication c
+            ON c.m_code = b.m_code
+        ";
+
+        return $this->getDataFromResult($this->queryExecutor($sql));
+    }
+
+    public function getAllTreatmentReport() {
+        $sql = "
+            SELECT * FROM treatment a 
+            INNER JOIN treat_use_med b
+            ON a.treat_code = b.treat_code
+            INNER JOIN medication c 
+            ON c.m_code = b.m_code
+        ";
+
+        return($this->getDataFromResult($this->queryExecutor($sql)));
+    }
 }
