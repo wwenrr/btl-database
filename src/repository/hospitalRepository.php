@@ -115,6 +115,8 @@ class hospitalRepository extends dataBaseRepository {
             ON a.treat_code = b.treat_code
             INNER JOIN medication c 
             ON c.m_code = b.m_code
+            INNER JOIN doc_treat_inpa d 
+            ON d.treat_code = a.treat_code
         ";
 
         return($this->getDataFromResult($this->queryExecutor($sql)));
