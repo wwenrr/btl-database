@@ -86,11 +86,17 @@ class hospitalRepository extends dataBaseRepository {
 
     public function findAllPatientTreatedByADoctor($doctor_code) {
         $sql = "
-            SELECT p_char, p_number, p_first_name, p_last_name, p_gender, 	p_dob, p_address, p_phone_number 
-            FROM doctor
-            INNER JOIN outpatient
-            ON doctor.ecode = outpatient.doctor_code
-            WHERE doctor.ecode = '$doctor_code'
+            SELECT c.p_char, c.p_number, c.p_first_name, c.p_last_name, c.p_gender, c.p_dob, c.p_address, c.p_phone_number
+            FROM doctor a 
+            JOIN doc_treat_inpa b 
+            ON b.e_code = a.ecode
+            JOIN inpatient c 
+            ON c.p_number = b.p_number
+            UNION ALL
+            SELECT d.p_char, d.p_number, d.p_first_name, d.p_last_name, d.p_gender, d.p_dob, d.p_address, d.p_phone_number
+            FROM doctor a 
+            JOIN outpatient d 
+            ON a.ecode = d.doctor_code
         ";
 
         return $this->getDataFromResult($this->queryExecutor($sql));
