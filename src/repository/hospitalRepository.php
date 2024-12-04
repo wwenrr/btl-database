@@ -1,7 +1,7 @@
 <?php
 
 class hospitalRepository extends dataBaseRepository {
-    public function getPasswordByUsername($username) {
+    public function getPasswordByUsername() {
         $sql = "
             SELECT password FROM user_data
             WHERE username = 'admin'
